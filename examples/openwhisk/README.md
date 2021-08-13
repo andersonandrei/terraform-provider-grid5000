@@ -1,6 +1,6 @@
 # How to deploy OpenWhisk on Grid'5000 using Terraform
 
-[OpenWhisk](https://openwhisk.apache.org) is an open source serverless cloud platform. 
+[OpenWhisk](https://openwhisk.apache.org) is an open source serverless cloud platform.
 
 ## How to use
 
@@ -32,7 +32,7 @@ module "g5k-openwhisk" {
 
     username = "username"           # Replace by your Grid'5000 username
     nodes_location = "rennes"
-    nodes_count = 5                 # Min: 2 (1 controleplane, 1 worker node)     
+    nodes_count = 5                 # Min: 2 (1 controleplane, 1 worker node)
     walltime = "1"
 
     data_location = "rennes"        # rennes or nantes
@@ -106,6 +106,17 @@ wsk_set_auth = "wsk property set --auth 23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123
 
 ```sh
 # When terraform apply is completed, a kubeconfig file must be
+# created in the current directory, some labels must be done
+# and Openwhisk must be seted up with the correct credentials.
+# For that, use the following script
+
+> python3 finalize_terraform_initialization.py -r kube_config_cluster.yml
+
+# Or do it manually with the instructions below.
+```
+
+```sh
+# When terraform apply is completed, a kubeconfig file must be
 # created in the current directory
 > export KUBECONFIG=${PWD}/kube_config_cluster.yml
 
@@ -168,7 +179,7 @@ service/ow-zookeeper    ClusterIP   None            <none>        2181/TCP,2888/
 ```sh
 > wsk property set --apihost https://<one_of_your_workers_nodes>:31001 # See terraform output wsk_set_apihost
 > wsk property set --auth 23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP
-> wsk --insecure package list /whisk.system                                                                   
+> wsk --insecure package list /whisk.system
 packages
 /whisk.system/messaging                                                shared
 /whisk.system/alarms                                                   shared
