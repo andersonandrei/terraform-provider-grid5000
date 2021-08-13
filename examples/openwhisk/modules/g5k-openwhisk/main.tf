@@ -68,8 +68,6 @@ csiConfig:
 - clusterID: g5k-ceph
   monitors:
   - ceph0.${var.data_location}.grid5000.fr
-  - ceph1.${var.data_location}.grid5000.fr
-  - ceph2.${var.data_location}.grid5000.fr
 EOT
   ]
 }
