@@ -4,7 +4,7 @@ module "g5k-openwhisk" {
     username = "adasilva" # Replace by your Grid'5000 username
     nodes_location = "rennes"
     nodes_count = 5
-    nodes_selector = "{cluster = 'parapide'}"
+    nodes_selector = "{cluster = 'parapide'}" # To specify a site 
     walltime = "1"
 
     data_location = "rennes" # rennes or nantes
