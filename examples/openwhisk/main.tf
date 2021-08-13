@@ -1,13 +1,17 @@
 module "g5k-openwhisk" {
     source = "./modules/g5k-openwhisk"
 
-    username = "username" # Replace by your Grid'5000 username
+    username = "adasilva" # Replace by your Grid'5000 username
     nodes_location = "rennes"
     nodes_count = 5
+    nodes_selector = "{cluster = 'parapide'}" # To specify a cluster
     walltime = "1"
 
     data_location = "rennes" # rennes or nantes
     ceph_pool_quota = "200G"
+
+    kafka_replicas = 1              # Default: 1, according to available worker nodes
+    kafka_persistence_size = "30Gi"   # Default: 20Gi
 }
 
 output "wsk_set_apihost" {
